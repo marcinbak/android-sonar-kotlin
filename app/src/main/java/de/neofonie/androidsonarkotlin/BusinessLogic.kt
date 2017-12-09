@@ -7,6 +7,7 @@ package de.neofonie.androidsonarkotlin
  */
 class BusinessLogic {
 
+
   fun someLogic(param1: String, param2: Int): String {
     return "$param1:$param2"
   }

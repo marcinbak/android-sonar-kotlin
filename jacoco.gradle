@@ -45,7 +45,7 @@ android {
     unitTests.all {
       jacoco {
         includeNoLocationClasses = true
-        destinationFile file("$buildDir/jacoco/test.exec-partial")
+//        destinationFile file("$buildDir/jacoco/test.exec-partial")
       }
     }
   }
