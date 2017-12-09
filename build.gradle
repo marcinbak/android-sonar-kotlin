@@ -1,27 +1,53 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.1.60'
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  ext.kotlin_version = '1.2.0'
+  ext.jacoco_version = '0.7.9'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.1"
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+  repositories {
+    google()
+    jcenter()
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
+}
+
+apply plugin: "org.sonarqube"
+
+sonarqube {
+  androidVariant 'debug'
+
+  properties {
+    property "sonar.verbose", true
+    property "sonar.host.url", "http://localhost:9000"
+    property "sonar.projectName", "ADAC_Pannenhilfe_Android"
+    property "sonar.projectKey", "de.neofonie:pannenhilfe-android"
+    property "sonar.sourceEncoding", "UTF-8"
+    property "sonar.projectVersion", "0.1"
+
+    property "sonar.issuesReport.html.enable", "true"
+    property "sonar.issuesReport.console.enable", "true"
+
+    property "detekt.sonar.kotlin.config.path", "../detekt-config.yml"
+
+    property "sonar.java.coveragePlugin", "jacoco"
+    property "sonar.java.binaries", "$projectDir/app/build/intermediates/classes/debug,$projectDir/app/build/intermediates/classes/debug,$projectDir/app/build/tmp/kotlin-classes/debug"
+    property "sonar.java.test.binaries", "$projectDir/app/build/intermediates/classes/test,$projectDir/app/build/intermediates/classes/test,$projectDir/app/build/tmp/kotlin-classes/debugUnitTest"
+
+    property 'sonar.jacoco.reportPaths', "${rootProject.buildDir}/jacoco/mergeJacoco.exec"
+  }
 }
