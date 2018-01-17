@@ -38,14 +38,14 @@ sonarqube {
     property "sonar.issuesReport.html.enable", "true"
     property "sonar.issuesReport.console.enable", "true"
 
-    property "detekt.sonar.kotlin.config.path", "../detekt-config.yml"
+    property "detekt.sonar.kotlin.config.path", "detekt-config.yml"
+
+    property "sonar.sources", "app/src/main/java"
+    property "sonar.tests", "app/src/test/java"
 
     property "sonar.java.coveragePlugin", "jacoco"
-    property "sonar.java.binaries", "${rootProject.projectDir}/app/build/intermediates/classes/debug," +
-        "${rootProject.projectDir}/app/build/intermediates/classes/debug," +
-        "${rootProject.projectDir}/app/build/tmp/kotlin-classes/debug"
-
-    property "sonar.java.test.binaries", "$projectDir/app/build/intermediates/classes/test,$projectDir/app/build/intermediates/classes/test,$projectDir/app/build/tmp/kotlin-classes/debugUnitTest"
+    property "sonar.java.binaries", "${rootProject.projectDir}/app/build/intermediates/classes," +
+        "${rootProject.projectDir}/app/build/tmp/kotlin-classes"
 
     property 'sonar.jacoco.reportPaths', "${rootProject.projectDir}/app/build/jacoco/testDebugUnitTest.exec"
   }
