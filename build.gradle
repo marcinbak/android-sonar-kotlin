@@ -38,7 +38,7 @@ sonarqube {
     property "sonar.issuesReport.html.enable", "true"
     property "sonar.issuesReport.console.enable", "true"
 
-    property "detekt.sonar.kotlin.config.path", "detekt-config.yml"
+    property "detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml"
 
     property "sonar.sources", "app/src/main/java"
     property "sonar.tests", "app/src/test/java"
