@@ -26,4 +26,5 @@ class SomeBusinessLogicTest {
     // Then
     assertEquals("13", result)
   }
+
 }

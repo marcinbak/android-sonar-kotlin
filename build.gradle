@@ -43,9 +43,21 @@ sonarqube {
     property "sonar.issuesReport.html.enable", "true"
     property "sonar.issuesReport.console.enable", "true"
 
-    property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/app/build/reports/jacocoTestReport.xml,${rootDir}/androidlibrary/build/reports/jacocoTestReport.xml"
+    property "sonar.coverage.jacoco.xmlReportPaths", findAllReports()
     property "detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml"
 
     property "sonar.java.coveragePlugin", "jacoco"
   }
+}
+
+String findAllReports() {
+  def file = "${rootProject.buildDir}/reports"
+
+  def sonarEnabledProjects = rootProject.subprojects
+      .findAll { p -> p.sonarqube.getProperties().get("skipProject") == false }
+      *.name
+      .collect { projectName -> "$file/jacocoTestReport-${projectName}.xml" }
+      .join(",")
+
+  return sonarEnabledProjects
 }
