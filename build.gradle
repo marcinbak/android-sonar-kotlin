@@ -32,21 +32,20 @@ sonarqube {
   androidVariant 'debug'
 
   properties {
+    property "sonar.sourceEncoding", "UTF-8"
     property "sonar.verbose", true
     property "sonar.host.url", "http://localhost:9000"
 
+    property "sonar.projectName", "Test Android Coverage"
+    property "sonar.projectKey", "test-android-coverage"
+    property "sonar.sourceEncoding", "UTF-8"
+    property "sonar.projectVersion", "0.1"
     property "sonar.issuesReport.html.enable", "true"
     property "sonar.issuesReport.console.enable", "true"
 
+    property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/app/build/reports/jacocoTestReport.xml,${rootDir}/androidlibrary/build/reports/jacocoTestReport.xml"
     property "detekt.sonar.kotlin.config.path", "${rootProject.projectDir}/detekt-config.yml"
 
-    property "sonar.sources", "app/src/main/java"
-    property "sonar.tests", "app/src/test/java"
-
     property "sonar.java.coveragePlugin", "jacoco"
-    property "sonar.java.binaries", "${rootProject.projectDir}/app/build/intermediates/classes," +
-        "${rootProject.projectDir}/app/build/tmp/kotlin-classes"
-
-    property 'sonar.jacoco.reportPaths', "${rootProject.projectDir}/app/build/jacoco/testDebugUnitTest.exec"
   }
 }
