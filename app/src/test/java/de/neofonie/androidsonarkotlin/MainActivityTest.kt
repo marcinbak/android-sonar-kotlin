@@ -12,7 +12,7 @@ import org.robolectric.annotation.Config
  * Created by marcinbak on 17.01.18.
  */
 @RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, sdk = intArrayOf(19, 21))
+@Config(constants = BuildConfig::class, sdk = [19, 21])
 class MainActivityTest {
 
   private lateinit var controller: ActivityController<MainActivity>
